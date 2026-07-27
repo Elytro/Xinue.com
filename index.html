@@ -1,295 +1,266 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上传图片 - 免费图片托管</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>兰山区梦颖网络中心</title>
     <link href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
+        html { scroll-behavior: smooth; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
-            background: #fff;
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #3d313e;
+            background: #f7f1f7;
+            -webkit-font-smoothing: antialiased;
         }
-        .main-content {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
+        a { color: #b71f90; transition: color 0.3s; }
+        a:hover { color: #7a1460; text-decoration: none; }
+
+        .navbar {
+            margin-bottom: 0; border: none; border-radius: 0;
+            background: #ffffff;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2dde2;
         }
-        .hero-section {
-            text-align: center;
-            max-width: 600px;
+        .navbar-brand {
+            font-size: 22px; font-weight: 700; letter-spacing: 2px;
+            color: #4a164f !important;
         }
-        .hero-section h1 {
-            font-size: 48px;
-            font-weight: 300;
-            color: #333;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+        .navbar-nav > li > a {
+            font-size: 14px; letter-spacing: 1px;
+            color: #6c5d6e !important;
+            padding: 15px 20px; transition: all 0.3s;
         }
-        .hero-section p {
-            font-size: 18px;
-            color: #999;
-            font-weight: 300;
-            margin-bottom: 50px;
-            line-height: 1.8;
+        .navbar-nav > li > a:hover {
+            color: #77237f !important;
+            background: #f0eef1;
+            border-radius: 4px;
         }
-        .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            padding: 16px 60px;
-            font-size: 16px;
-            font-weight: 500;
-            letter-spacing: 2px;
+
+        .hero {
+            background: linear-gradient(135deg, #f1e2f2 0%, #f8f1f8 100%);
+            padding: 120px 0 100px; text-align: center;
+        }
+        .hero h1 {
+            font-size: 42px; font-weight: 300; letter-spacing: 4px;
+            margin-bottom: 20px; color: #3b113f;
+        }
+        .hero p {
+            font-size: 16px; color: #8c708e; letter-spacing: 2px;
+            max-width: 500px; margin: 0 auto 40px; line-height: 1.8;
+        }
+        .hero .btn-outline {
+            display: inline-block; padding: 12px 25px;
+            border: 1px solid #681f6f;
+            color: #681f6f;
+            font-size: 14px; letter-spacing: 2px;
+            background: transparent; border-radius: 30px;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-            position: relative;
-            overflow: hidden;
         }
-        .btn-login::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-        .btn-login:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
-        }
-        .btn-login:hover::before {
-            left: 100%;
-        }
-        .btn-login:focus {
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
-        }
-        .btn-login:active {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-            font-size: 13px;
-            font-weight: 300;
-        }
-        .footer a {
-            color: #999;
+        .hero .btn-outline:hover {
+            background: #681f6f;
+            color: #ffffff;
             text-decoration: none;
         }
-        .footer a:hover {
-            color: #667eea;
+
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 {
+            font-size: 28px; font-weight: 300; letter-spacing: 3px;
+            margin-bottom: 15px; color: #431447;
         }
-        .divider {
-            width: 60px;
-            height: 3px;
-            background: #333;
-            margin: 0 auto 30px;
+        .section-title .line {
+            display: block; width: 40px; height: 1px;
+            background: #bb38c6; margin: 0 auto;
         }
-        .notice-bar {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            border-radius: 8px;
-            padding: 12px 20px;
-            margin-top: 40px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+
+        .about { padding: 80px 0; }
+        .about .feature-item { text-align: center; padding: 40px 20px; }
+        .about .feature-item .fa {
+            font-size: 36px; color: #9f75a3; margin-bottom: 20px;
         }
-        .notice-content {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-            animation: scrollNotice 15s linear infinite;
+        .about .feature-item h4 {
+            font-size: 16px; font-weight: 400; letter-spacing: 2px;
+            margin-bottom: 12px; color: #583e5a;
         }
-        .notice-content:hover {
-            animation-play-state: paused;
+        .about .feature-item p {
+            font-size: 13px; color: #a694a7; line-height: 1.8;
         }
-        .notice-icon {
-            font-size: 16px;
-            margin-right: 10px;
+        .about .company-intro { margin-bottom: 50px; text-align: justify; }
+        .about .company-intro p {
+            font-size: 15px; color: #624e63; line-height: 2;
+            text-indent: 2em; margin-bottom: 10px;
         }
-        .notice-text {
-            color: #667eea;
-            font-size: 14px;
-            font-weight: 500;
+
+        .services { padding: 80px 0; background: #f2e6f3; }
+        .services .service-card {
+            background: #ffffff; padding: 30px 25px; margin-bottom: 30px;
+            text-align: center; transition: all 0.35s;
+            border: 1px solid #e2dde2; border-radius: 4px;
         }
-        @keyframes scrollNotice {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+        .services .service-card:hover {
+            box-shadow: 0 8px 30px rgba(209,39,124,0.08);
+            transform: translateY(-3px);
         }
-        .chatbot-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
+        .services .service-card .fa {
+            font-size: 32px; color: #9a5f9f; margin-bottom: 18px;
         }
-        .chatbot-modal.active {
-            display: flex;
+        .services .service-card h4 {
+            font-size: 15px; letter-spacing: 2px; margin-bottom: 10px;
+            font-weight: 400; color: #523a54;
         }
-        .chatbot-content {
-            background: #fff;
-            width: 90%;
-            max-width: 650px;
-            height: 80vh;
-            max-height: 700px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            animation: modalSlideIn 0.3s ease-out;
+        .services .service-card p {
+            font-size: 13px; color: #a18ea3; line-height: 1.8;
         }
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+
+        .contact { padding: 80px 0; text-align: center; }
+        .contact p {
+            font-size: 15px; color: #8e7890;
+            letter-spacing: 1px; line-height: 2;
         }
-        .chatbot-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        .footer {
+            background: #2c0d2f; padding: 40px 0 10px;
+            text-align: center; color: #a589a8;
+            font-size: 13px; line-height: 2;
         }
-        .chatbot-header h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 500;
+        .footer a { color: #bca7bd; transition: color 0.3s; }
+        .footer a:hover { color: #ffffff; }
+        .footer .filing-info { margin-top: 10px; }
+        .footer .filing-info span { margin: 0 10px; color: #605062; }
+
+        .btn-primary {
+            background: #77237f; border-color: #77237f;
         }
-        .close-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 28px;
-            cursor: pointer;
-            line-height: 1;
-            padding: 0;
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.3s;
+        .btn-primary:hover {
+            background: #952c9f; border-color: #952c9f;
         }
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .chatbot-iframe {
-            flex: 1;
-            width: 100%;
-            border: none;
-            overflow: hidden;
-        }
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 36px;
-            }
-            .hero-section p {
-                font-size: 16px;
-            }
-            .btn-login {
-                padding: 12px 40px;
-                font-size: 15px;
-            }
-            .chatbot-content {
-                width: 95%;
-                height: 85vh;
-            }
-        }
+        #loginModal .modal-content { border-radius: 8px; }
+        #loginModal .modal-header { border-bottom: 1px solid #e2dde2; }
+        #loginModal .modal-footer { border-top: 1px solid #e2dde2; }
     </style>
 </head>
 <body>
-    <div class="main-content">
-        <div class="hero-section">
-            <h1>贴图库</h1>
-            <div class="divider"></div>
-            <p>专注于为您提供专业、高效、可靠的图片外链和存储方案</p>
-            <a href="#" id="startBtn" class="btn btn-login"> 开 始 探 索 </a>
 
-            <!-- 滚动公告栏 -->
-            <div class="notice-bar">
-                <div class="notice-content">
-                    <span class="notice-text">友情提示：本站的Api接口全栈托管于微信开放平台，包括内容检测，图片鉴黄，违法违规检查等，所有服务均由微信公众平台提供服务！</span>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">菜单</span>
+                    <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">梦颖网络</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于</a></li>
+                    <li><a href="#services">服务</a></li>
+                    <li><a href="#cases">案例</a></li>
+                    <li><a href="javascript:void(0)" onclick="$('#loginModal').modal('show')">登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>极简 · 专业 · 信赖</h1>
+            <p>您正在访问域名 Xinue.com 为梦颖网络业务域名。<br/>用于承载梦颖网络旗下运营的<b>企业微信群</b>的二维码交互内容。</p>
+            <a href="//mb.xinue.com" class="btn-outline">开 始 探 索</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>关于我们</h2>
+                <span class="line"></span>
+            </div>
+            <div class="company-intro">
+                <p>兰山区梦颖网络中心成立于2023年08月31日，注册地位于山东省临沂市兰山区兰山街道蒙山大道顺和母幼采购基地2-32号。</p>
+                <p>经营范围：网络技术服务；软件开发；广告制作；广告发布；广告设计、代理；平面设计；软件外包服务；信息技术咨询服务；网络与信息安全软件开发；技术服务、技术开发、技术咨询、技术交流、技术转让、技术推广。</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><div class="feature-item"><i class="fa fa-diamond"></i><h4>网址缩短</h4><p>缩短后发布到对应的企业微信群内，方便分享浏览。</p></div></div>
+                <div class="col-md-4"><div class="feature-item"><i class="fa fa-lightbulb-o"></i><h4>图片分享</h4><p>保持对前沿技术的敏锐感知，驱动业务不断进化。</p></div></div>
+                <div class="col-md-4"><div class="feature-item"><i class="fa fa-heart-o"></i><h4>会员管理</h4><p>用心聆听客户的需求，提供量身定制的服务方案。</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>服务项目</h2>
+                <span class="line"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6"><div class="service-card"><i class="fa fa-desktop"></i><h4>网站建设</h4><p>响应式企业官网设计与开发</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="service-card"><i class="fa fa-mobile"></i><h4>移动应用</h4><p>iOS / Android 原生应用开发</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="service-card"><i class="fa fa-cloud"></i><h4>云计算服务</h4><p>企业级云架构搭建与运维</p></div></div>
+                <div class="col-md-3 col-sm-6"><div class="service-card"><i class="fa fa-line-chart"></i><h4>品牌策划</h4><p>品牌定位与数字化营销策略</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="services" style="background:#f7f1f7;">
+        <div class="container">
+            <div class="section-title">
+                <h2>案例展示</h2>
+                <span class="line"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6"><div class="service-card"><i class="fa fa-shopping-cart"></i><h4>微信小程序</h4><p>电商平台搭建项目</p></div></div>
+                <div class="col-md-4 col-sm-6"><div class="service-card"><i class="fa fa-building-o"></i><h4>微信公众号</h4><p>某某行业解决方案</p></div></div>
+                <div class="col-md-4 col-sm-6"><div class="service-card"><i class="fa fa-bank"></i><h4>企业微信群</h4><p>金融数字化转型案例</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Copyright &copy; 2026 <a href="//www.xinue.com">兰山区梦颖网络中心</a> 版权所有.</p>
+            <p class="filing-info">
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow">鲁ICP备2025189343号-5</a>
+                <span>|</span>
+                <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37131202371948" target="_blank" rel="nofollow">鲁公网安备37131202371948号</a>
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="关闭"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModalLabel">用户登录</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group"><div class="input-group"><span class="input-group-addon"><i class="fa fa-user"></i></span><input type="text" id="loginUsername" class="form-control" placeholder="请输入用户名"></div></div>
+                    <div class="form-group"><div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span><input type="password" id="loginPassword" class="form-control" placeholder="请输入密码"></div></div>
+                    <div class="checkbox" style="margin-top:0;margin-bottom:10px;"><label><input type="checkbox" id="rememberMe"> 记住密码</label></div>
+                    <button type="button" id="loginBtn" class="btn btn-primary btn-block">登 录</button>
+                    <div id="loginMsg" style="text-align:center;margin-top:10px;font-size:13px;"></div>
+                </div>
+                <div class="modal-footer" style="text-align:center;">
+                    <span style="font-size:13px;color:#9c899e;">还没有账号？<a href="javascript:void(0)" style="color:#b71f90;">立即注册</a></span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 聊天机器人模态框 -->
-    <div class="chatbot-modal" id="chatbotModal">
-        <div class="chatbot-content">
-            <iframe
-                class="chatbot-iframe"
-                src="https://chatbot.weixin.qq.com/webapp/BhvTR80a9U2GFfKizIeG7QLi5nrxJt?isFloat=false&robotName=%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%20-%20%E5%85%8D%E8%B4%B9%E5%9B%BE%E7%89%87%E6%89%98%E7%AE%A1"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-    <footer class="footer">
-        <p>&copy; 2025 <a href="">校内网</a> & <a href="">百度图床</a> & <a href="">梦颖网络</a>. 版权所有.</p>
-        <p><a href="//beian.miit.gov.cn">鲁ICP备2025189343号-5</a> · <a href="">鲁公网安备37131202371948号</a></p>
-    </footer>
-
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            // 点击"开始探索"按钮打开模态框
-            $('#startBtn').on('click', function(e) {
-                e.preventDefault();
-                $('#chatbotModal').addClass('active');
-                $('body').css('overflow', 'hidden'); // 防止背景滚动
-            });
-
-
-            // 点击模态框外部关闭
-            $('#chatbotModal').on('click', function(e) {
-                if (e.target === this) {
-                    $(this).removeClass('active');
-                    $('body').css('overflow', '');
-                }
-            });
-
-            // 按ESC键关闭模态框
-            $(document).on('keydown', function(e) {
-                if (e.key === 'Escape' && $('#chatbotModal').hasClass('active')) {
-                    $('#chatbotModal').removeClass('active');
-                    $('body').css('overflow', '');
-                }
-            });
+        $('#loginBtn').on('click', function() {
+            var username = $('#loginUsername').val().trim();
+            var password = $('#loginPassword').val().trim();
+            if (!username) { $('#loginMsg').html('<span style="color:#d9534f;">请输入用户名</span>'); return; }
+            if (!password) { $('#loginMsg').html('<span style="color:#d9534f;">请输入密码</span>'); return; }
+            $('#loginMsg').html('<span style="color:#b71f90;">登录中...</span>');
+            setTimeout(function() { $('#loginMsg').html('<span style="color:#5cb85c;">登录成功！欢迎回来</span>'); }, 1000);
         });
     </script>
 </body>
